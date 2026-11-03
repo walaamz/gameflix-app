@@ -1,6 +1,8 @@
+
 package com.gameflix.exception;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
@@ -20,6 +22,17 @@ public class GlobalExceptionHandler {
                         "error", exception.getReason() != null
                                 ? exception.getReason()
                                 : "Request failed"
+                ));
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidationException(
+            MethodArgumentNotValidException exception) {
+
+        return ResponseEntity
+                .badRequest()
+                .body(Map.of(
+                        "error", "Invalid registration input"
                 ));
     }
 }

@@ -40,3 +40,6 @@ application-local.properties
 
 # IntelliJ local configuration
 .idea/
+
+.env
+target/
