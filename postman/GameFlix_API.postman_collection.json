@@ -103,6 +103,227 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "GameFlix - Get All Games",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/games",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "games"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Get Game by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/games/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "games",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Search Games by Title",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/games?title=mine",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "games"
+          ],
+          "query": [
+            {
+              "key": "title",
+              "value": "mine"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Filter Games by Genre",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/games?genre=rpg",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "games"
+          ],
+          "query": [
+            {
+              "key": "genre",
+              "value": "rpg"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Search and Filter Games",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/games?title=elden&genre=rpg",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "games"
+          ],
+          "query": [
+            {
+              "key": "title",
+              "value": "elden"
+            },
+            {
+              "key": "genre",
+              "value": "rpg"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Get Nonexistent Game",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/games/9999",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "games",
+            "9999"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Get Invalid Game ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/games/-1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "games",
+            "-1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Blank Search Parameter",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/games?title=",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "games"
+          ],
+          "query": [
+            {
+              "key": "title",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Search with No Matches",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/games?title=elden&genre=Sandbox",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "games"
+          ],
+          "query": [
+            {
+              "key": "title",
+              "value": "elden"
+            },
+            {
+              "key": "genre",
+              "value": "Sandbox"
+            }
+          ]
+        }
+      },
+      "response": []
     }
   ],
   "event": [

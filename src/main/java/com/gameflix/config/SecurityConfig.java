@@ -57,6 +57,12 @@ public class SecurityConfig {
                                 "/api/auth/login"
                         ).permitAll()
 
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/games",
+                                "/api/games/**"
+                        ).permitAll()
+
                         .requestMatchers("/error").permitAll()
 
                         .anyRequest().authenticated()
