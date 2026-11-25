@@ -26,6 +26,12 @@ public class User {
         this.password = password;
     }
 
+    // New accounts receive regular user permissions by default.
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false,
+            length = 20, columnDefinition = "VARCHAR(20) DEFAULT 'USER'")
+    private Role role = Role.USER;
+
     public Long getId() {
         return id;
     }
@@ -44,5 +50,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

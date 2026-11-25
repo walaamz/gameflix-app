@@ -41,6 +41,39 @@
       "response": []
     },
     {
+      "name": "GameFlix - Register Admin Account",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"test@gameflix.com\",\r\n  \"password\": \"TestPassword123!\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "GameFlix - Invalid Registration Input",
       "request": {
         "auth": {
@@ -919,6 +952,515 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "GameFlix - Admin Create Game",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0tfr}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"Hollow Knight\",\r\n    \"description\": \"An action-adventure game set in a mysterious underground kingdom.\",\r\n    \"genre\": \"Action\",\r\n    \"releaseDate\": \"2017-02-24\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/admin/games",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin",
+            "games"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Admin Update Game",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/admin/games/7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin",
+            "games",
+            "7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Admin Delete Game",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0tfr}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/admin/games/7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin",
+            "games",
+            "7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Verify Game Deletion",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/games/7",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "games",
+            "7"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Admin Invalid Game Input",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0tfr}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"\",\r\n    \"description\": \"Testing invalid game input.\",\r\n    \"genre\": \"Action\",\r\n    \"releaseDate\": \"2026-01-01\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/admin/games",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin",
+            "games"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Unauthorized Game Creation",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0v4v}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"Unauthorized Test Game\",\r\n    \"description\": \"Testing administrator access restrictions.\",\r\n    \"genre\": \"Action\",\r\n    \"releaseDate\": \"2026-01-01\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/admin/games",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin",
+            "games"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Unauthenticated Game Creation",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"Unauthorized Test Game\",\r\n    \"description\": \"Testing unauthenticated administrator access.\",\r\n    \"genre\": \"Action\",\r\n    \"releaseDate\": \"2026-01-01\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/admin/games",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin",
+            "games"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Admin Create Subscription Plan",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0tfr}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"planName\": \"Ultimate\",\r\n    \"price\": 19.99\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/admin/subscription-plans",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin",
+            "subscription-plans"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Admin Update Subscription Plan",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0tfr}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"planName\": \"Ultimate Plus\",\r\n    \"price\": 24.99\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/admin/subscription-plans/4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin",
+            "subscription-plans",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Admin Delete Subscription Plan",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0t5q}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/admin/subscription-plans/4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin",
+            "subscription-plans",
+            "4"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Verify Subscription Plan Deletion",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/subscription-plans",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "subscription-plans"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Admin Delete Subscription Plan In Use",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0t5q}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/admin/subscription-plans/3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin",
+            "subscription-plans",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Admin Invalid Subscription Plan Input",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_0t5q}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"planName\": \"Invalid Test Plan\",\r\n    \"price\": -5.99\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/admin/subscription-plans",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin",
+            "subscription-plans"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Unauthorized Subscription Plan Creation",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{json_web_token_1409}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"planName\": \"Unauthorized Test Plan\",\r\n    \"price\": 19.99\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/admin/subscription-plans",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin",
+            "subscription-plans"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GameFlix - Unauthenticated Subscription Plan Creation",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"planName\": \"Unauthenticated Test Plan\",\r\n    \"price\": 19.99\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/admin/subscription-plans",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "admin",
+            "subscription-plans"
+          ]
+        }
+      },
+      "response": []
     }
   ],
   "event": [
@@ -956,6 +1498,22 @@
     },
     {
       "key": "json_web_token_1a36",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0tfr",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0v4v",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_0t5q",
+      "secret": true
+    },
+    {
+      "key": "json_web_token_1409",
       "secret": true
     }
   ]

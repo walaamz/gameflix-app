@@ -70,17 +70,31 @@ public class SecurityConfig {
                                         "/api/subscription-plans"
                                 ).permitAll()
 
+                        // Restrict administrative endpoints to administrator accounts.
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+
                         .requestMatchers("/error").permitAll()
 
                         .anyRequest().authenticated()
                 )
 
                 .exceptionHandling(exceptions -> exceptions
+
+                        // Return 401 when authentication is missing or invalid.
                         .authenticationEntryPoint((request, response, exception) -> {
                             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                             response.setContentType("application/json");
                             response.getWriter().write(
                                     "{\"error\":\"Unauthorized\"}"
+                            );
+                        })
+
+                        // Return 403 when the user lacks the required permissions.
+                        .accessDeniedHandler((request, response, exception) -> {
+                            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                            response.setContentType("application/json");
+                            response.getWriter().write(
+                                    "{\"error\":\"Access denied\"}"
                             );
                         })
                 )

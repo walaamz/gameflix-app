@@ -22,4 +22,5 @@ public interface SubscriptionRepository
 
     // Checks whether a subscription plan is currently referenced.
     boolean existsByPlan_PlanId(Long planId);
+
 }

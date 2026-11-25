@@ -5,6 +5,8 @@ import com.gameflix.repository.GameRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import com.gameflix.dto.GameRequest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -62,5 +64,36 @@ public class GameService {
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Game not found"
                 ));
+    }
+
+    @Transactional
+    public Game createGame(GameRequest request) {
+        Game game = new Game(
+                request.getTitle().trim(),
+                request.getDescription().trim(),
+                request.getGenre().trim(),
+                request.getReleaseDate()
+        );
+
+        return gameRepository.save(game);
+    }
+
+    @Transactional
+    public Game updateGame(Long id, GameRequest request) {
+        Game game = getGameById(id);
+
+        game.setTitle(request.getTitle().trim());
+        game.setDescription(request.getDescription().trim());
+        game.setGenre(request.getGenre().trim());
+        game.setReleaseDate(request.getReleaseDate());
+
+        return gameRepository.save(game);
+    }
+
+    @Transactional
+    public void deleteGame(Long id) {
+        Game game = getGameById(id);
+
+        gameRepository.delete(game);
     }
 }
