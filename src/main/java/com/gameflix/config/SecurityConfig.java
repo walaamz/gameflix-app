@@ -57,11 +57,18 @@ public class SecurityConfig {
                                 "/api/auth/login"
                         ).permitAll()
 
-                        .requestMatchers(
-                                HttpMethod.GET,
-                                "/api/games",
-                                "/api/games/**"
-                        ).permitAll()
+                                // Allows public access to the game catalog.
+                                .requestMatchers(
+                                        HttpMethod.GET,
+                                        "/api/games",
+                                        "/api/games/**"
+                                ).permitAll()
+
+                                // Allows visitors to browse subscription plans.
+                                .requestMatchers(
+                                        HttpMethod.GET,
+                                        "/api/subscription-plans"
+                                ).permitAll()
 
                         .requestMatchers("/error").permitAll()
 
