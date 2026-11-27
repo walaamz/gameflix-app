@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import com.gameflix.dto.GameRequest;
 import org.springframework.transaction.annotation.Transactional;
+import com.gameflix.repository.FavoriteRepository;
 
 import java.util.List;
 
@@ -14,9 +15,13 @@ import java.util.List;
 public class GameService {
 
     private final GameRepository gameRepository;
+    private final FavoriteRepository favoriteRepository;
 
-    public GameService(GameRepository gameRepository) {
+    // Inject repositories for game management and favorite cleanup.
+    public GameService(GameRepository gameRepository,
+                       FavoriteRepository favoriteRepository) {
         this.gameRepository = gameRepository;
+        this.favoriteRepository = favoriteRepository;
     }
 
     public List<Game> getGames(String title, String genre) {
@@ -90,10 +95,19 @@ public class GameService {
         return gameRepository.save(game);
     }
 
+    // Delete a game and its associated favorites in a single transaction.
     @Transactional
     public void deleteGame(Long id) {
+
+        // Validate the game ID and confirm the game exists.
         Game game = getGameById(id);
 
+        // Remove dependent favorite records to prevent
+        // foreign key constraint violations.
+        favoriteRepository.deleteById_GameId(id);
+        favoriteRepository.flush();
+
+        // Delete the game after its associated favorites are removed.
         gameRepository.delete(game);
     }
 }
